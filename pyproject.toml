@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "check_isg_wpm_sensor"
+version = "0.1.0"
+description = "Nagios/Icinga plugin for Stiebel Eltron heat pumps with WPM, via the Modbus TCP interface of the ISG"
+readme = "README.md"
+license = {text = "GPL-3.0-or-later"}
+authors = [
+    { name = "Thomas Wagner", email = "wagner-thomas@gmx.at" },
+]
+requires-python = ">=3.8"
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: System :: Monitoring",
+]
+dependencies = []
+
+[project.scripts]
+check_isg_wpm_sensor = "check_isg_wpm_sensor:run"
+
+[tool.setuptools.packages.find]
+where = ["src"]
