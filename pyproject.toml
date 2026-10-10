@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "check_isg_wpm_sensor"
-version = "0.2.0"
+version = "0.2.1"
 description = "Nagios/Icinga plugin for Stiebel Eltron heat pumps with WPM, via the Modbus TCP interface of the ISG"
 readme = "README.md"
 license = {text = "GPL-3.0-or-later"}
