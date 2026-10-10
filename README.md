@@ -164,6 +164,16 @@ $ pip install .
 
 This installs a `check_isg_wpm_sensor` console script.
 
+## Bash completion
+
+`completions/check_isg_wpm_sensor` completes the options and their values,
+also when the plugin is called by its full path. The packages install it;
+otherwise copy it to bash-completion's directory:
+
+```sh
+install -D -m 0644 completions/check_isg_wpm_sensor /usr/share/bash-completion/completions/check_isg_wpm_sensor
+```
+
 ## Tests
 
 ```console

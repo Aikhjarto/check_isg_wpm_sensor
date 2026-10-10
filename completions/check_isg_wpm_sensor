@@ -1,0 +1,48 @@
+# bash completion for check_isg_wpm_sensor                   -*- shell-script -*-
+
+_check_isg_wpm_sensor()
+{
+    local cur=${COMP_WORDS[COMP_CWORD]} prev=${COMP_WORDS[COMP_CWORD-1]}
+    # --option=value: bash splits at the =
+    if [[ $cur == = ]]; then
+        cur=
+    elif [[ $prev == = && $COMP_CWORD -ge 2 ]]; then
+        prev=${COMP_WORDS[COMP_CWORD-2]}
+    fi
+    COMPREPLY=()
+
+    case $prev in
+        -H | --host)
+            mapfile -t COMPREPLY < <(compgen -A hostname -- "$cur")
+            return
+            ;;
+        --check)
+            mapfile -t COMPREPLY < <(compgen -W 'sensor compare binary text fault' -- "$cur")
+            return
+            ;;
+        --unavailable-state)
+            mapfile -t COMPREPLY < <(compgen -W 'ok warning critical unknown' -- "$cur")
+            return
+            ;;
+        --true-state | --false-state | --match-state | --no-match-state)
+            mapfile -t COMPREPLY < <(compgen -W 'ok warning critical' -- "$cur")
+            return
+            ;;
+        --must-be)
+            mapfile -t COMPREPLY < <(compgen -W 'above below' -- "$cur")
+            return
+            ;;
+        -p | --port | --unit-id | -t | --timeout | --entity | -w | --warning | \
+            -c | --critical | --compare-entity | --binary-expr | --regex)
+            return
+            ;;
+    esac
+
+    # no positional arguments: offer the options
+    mapfile -t COMPREPLY < <(compgen -W '-h --help -V --version -H --host -p --port
+        --unit-id -t --timeout --list --all --check --entity --unavailable-state
+        -w --warning -c --critical --compare-entity --must-be --binary-expr
+        --true-state --false-state --regex -i --ignore-case --match-state
+        --no-match-state' -- "$cur")
+}
+complete -F _check_isg_wpm_sensor check_isg_wpm_sensor
